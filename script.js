@@ -1,113 +1,115 @@
-const screens=document.querySelectorAll(".screen");
-function goToScreen(number){
-  screens.forEach(screen=>screen.classList.remove("active"));
-  document.getElementById(`screen${number}`).classList.add("active");
+const screens=[...document.querySelectorAll(".screen")];
+const show=i=>{
+  screens.forEach(s=>s.classList.remove("active"));
+  document.getElementById("s"+i).classList.add("active");
+  if(i===1)spawnHearts();
+};
+
+function spawnHearts(){
+  const box=document.querySelector(".floating-hearts");
+  box.innerHTML="";
+  for(let i=0;i<8;i++){
+    const h=document.createElement("span");
+    h.textContent="♡";
+    h.style.left=(8+Math.random()*84)+"%";
+    h.style.top=(18+Math.random()*58)+"%";
+    h.style.fontSize=(12+Math.random()*13)+"px";
+    h.style.animationDelay=(Math.random()*4)+"s";
+    box.appendChild(h);
+  }
 }
+spawnHearts();
 
-document.getElementById("yesBtn").addEventListener("click",()=>{
-  createHearts();
-  setTimeout(()=>goToScreen(2),250);
-});
+const yes=document.getElementById("yes");
+yes.onclick=()=>{
+  yes.animate([{transform:"scale(1)"},{transform:"scale(.92)"},{transform:"scale(1)"}],{duration:300});
+  setTimeout(()=>show(2),180);
+};
 
-const noBtn=document.getElementById("noBtn");
-let noCount=0;
-const noMessages=[
-  "Үгүй гэж бодож байна уу? 😌",
-  "За за... дахиад нэг бод доо. 😏",
-  "Энэ чинь анхны болзоо шүү дээ 👀",
-  "Сүүлчийн оролдлого... үнэхээр үгүй гэж үү? ♡"
+const no=document.getElementById("no");
+let tries=0;
+const messages=[
+  "Үгүй гэж үү? 😌",
+  "Дахиад нэг бод доо... 😏",
+  "Анхны болзоо шүү дээ 👀",
+  "Сүүлчийн боломж... ♡"
 ];
 
-noBtn.addEventListener("click",()=>{
-  if(noCount>=4)return;
-  noCount++;
-  noBtn.textContent=noMessages[noCount-1];
-  const x=Math.random()*100-50;
-  const y=Math.random()*80-40;
-  noBtn.style.transform=`translate(${x}px,${y}px) rotate(${Math.random()*10-5}deg)`;
-  noBtn.animate([
-    {transform:`translate(${x}px,${y}px) rotate(-4deg)`},
-    {transform:`translate(${x+10}px,${y}px) rotate(4deg)`},
-    {transform:`translate(${x}px,${y}px) rotate(0deg)`}
-  ],{duration:500,easing:"ease-out"});
-  if(noCount===4){
+no.onclick=()=>{
+  if(tries>=4)return;
+  tries++;
+  const card=document.querySelector("#s1 .actions");
+  const maxX=Math.min(55,window.innerWidth*.13);
+  const x=(Math.random()>.5?1:-1)*(15+Math.random()*maxX);
+  const y=(Math.random()>.5?1:-1)*(5+Math.random()*22);
+  no.textContent=messages[tries-1];
+  no.animate([
+    {transform:`translate(0,0) rotate(0)`},
+    {transform:`translate(${x}px,${y}px) rotate(${x>0?5:-5}deg)`},
+    {transform:`translate(${x*.6}px,${y*.5}px) rotate(0)`}
+  ],{duration:500,easing:"cubic-bezier(.68,-.55,.27,1.55)"});
+  no.style.transform=`translate(${x*.6}px,${y*.5}px)`;
+  if(tries===4){
     setTimeout(()=>{
-      noBtn.textContent="Үгүй 🔒";
-      noBtn.classList.add("locked");
-      noBtn.style.transform="translate(0,0)";
-      noBtn.disabled=true;
-    },500);
+      no.textContent="Үгүй 🔒";
+      no.classList.add("locked");
+      no.style.transform="translate(0,0)";
+      no.disabled=true;
+    },450);
   }
-});
+};
 
-document.getElementById("toDay").addEventListener("click",()=>goToScreen(3));
+document.getElementById("continue").onclick=()=>show(3);
 
-const dayCards=document.querySelectorAll(".day-card");
+let chosenDay=null;
 const dayNext=document.getElementById("dayNext");
-let selectedDay=null;
-
-dayCards.forEach(card=>{
-  card.addEventListener("click",()=>{
-    dayCards.forEach(item=>item.classList.remove("selected"));
+document.querySelectorAll(".day").forEach(card=>{
+  card.onclick=()=>{
+    document.querySelectorAll(".day").forEach(x=>x.classList.remove("selected"));
     card.classList.add("selected");
-    selectedDay={mn:card.dataset.day,en:card.dataset.en};
+    chosenDay=card.dataset.day;
     dayNext.disabled=false;
-    card.animate([
-      {transform:"scale(.96)"},{transform:"scale(1.03)"},{transform:"scale(1)"}
-    ],{duration:450,easing:"ease-out"});
-  });
+    card.animate([{transform:"scale(.95)"},{transform:"translateY(-6px) scale(1.02)"},{transform:"translateY(-5px)"}],{duration:450});
+  };
 });
+dayNext.onclick=()=>{if(chosenDay)show(4)};
 
-dayNext.addEventListener("click",()=>{
-  if(!selectedDay)return;
-  goToScreen(4);
-});
-
-const timeCards=document.querySelectorAll(".time-card");
+let chosenTime=null;
 const timeNext=document.getElementById("timeNext");
-let selectedTime=null;
-
-timeCards.forEach(card=>{
-  card.addEventListener("click",()=>{
-    timeCards.forEach(item=>item.classList.remove("selected"));
+document.querySelectorAll(".time").forEach(card=>{
+  card.onclick=()=>{
+    document.querySelectorAll(".time").forEach(x=>x.classList.remove("selected"));
     card.classList.add("selected");
-    selectedTime=card.dataset.time;
+    chosenTime=card.dataset.time;
     timeNext.disabled=false;
-    card.animate([
-      {transform:"scale(.94)"},{transform:"scale(1.04)"},{transform:"scale(1)"}
-    ],{duration:400,easing:"ease-out"});
-  });
+  };
 });
+timeNext.onclick=()=>{
+  if(!chosenTime)return;
+  document.getElementById("pickedDay").textContent=chosenDay;
+  document.getElementById("pickedTime").textContent=chosenTime;
+  show(5);
+};
 
-timeNext.addEventListener("click",()=>{
-  if(!selectedTime)return;
-  document.getElementById("selectedDay").textContent=selectedDay.mn;
-  document.getElementById("selectedTime").textContent=selectedTime;
-  goToScreen(5);
-});
+document.getElementById("meet").onclick=()=>{
+  burst();
+  setTimeout(()=>show(6),450);
+};
 
-document.getElementById("meetBtn").addEventListener("click",()=>{
-  createHearts();
-  setTimeout(()=>goToScreen(6),500);
-});
-
-function createHearts(){
-  for(let i=0;i<12;i++){
-    const heart=document.createElement("div");
-    heart.innerHTML="♡";
-    heart.style.position="fixed";
-    heart.style.zIndex="100";
-    heart.style.left=Math.random()*100+"%";
-    heart.style.bottom="10%";
-    heart.style.fontSize=15+Math.random()*25+"px";
-    heart.style.color="white";
-    heart.style.pointerEvents="none";
-    document.body.appendChild(heart);
-    heart.animate([
-      {transform:"translateY(0) scale(.5) rotate(0deg)",opacity:0},
-      {transform:"translateY(-150px) scale(1) rotate(15deg)",opacity:1},
-      {transform:"translateY(-400px) scale(.7) rotate(-15deg)",opacity:0}
-    ],{duration:1800+Math.random()*1000,easing:"ease-out"});
-    setTimeout(()=>heart.remove(),3000);
+function burst(){
+  for(let i=0;i<18;i++){
+    const h=document.createElement("div");
+    h.textContent=Math.random()>.25?"♡":"✦";
+    Object.assign(h.style,{
+      position:"fixed",zIndex:99,left:(Math.random()*100)+"%",bottom:"14%",
+      color:"#fff",fontSize:(14+Math.random()*22)+"px",pointerEvents:"none"
+    });
+    document.body.appendChild(h);
+    h.animate([
+      {transform:"translateY(0) scale(.4) rotate(0)",opacity:0},
+      {transform:`translate(${(Math.random()-.5)*80}px,-170px) scale(1) rotate(20deg)`,opacity:1},
+      {transform:`translate(${(Math.random()-.5)*150}px,-420px) scale(.6) rotate(-20deg)`,opacity:0}
+    ],{duration:1700+Math.random()*700,easing:"ease-out"});
+    setTimeout(()=>h.remove(),2600);
   }
 }

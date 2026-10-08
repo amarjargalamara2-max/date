@@ -1,109 +1,119 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coffee Date ♡</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Кофе уух уу? ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app">
-    <div class="hearts"><span>♡</span><span>♡</span><span>♡</span><span>♡</span><span>♡</span></div>
+<div class="app">
 
-    <section class="screen active" id="screen1">
-      <div class="background coffee-bg"></div><div class="dark-overlay"></div>
-      <div class="content hero-content">
-        <div class="small-title">COFFEE DATE</div>
-        <div class="coffee-icon">☕</div>
-        <h1>Кофе<br>уух уу?</h1>
-        <p>Сайн кофе, сайхан яриа,<br>жаахан тухтай цаг. ♡</p>
-        <div class="buttons">
-          <button class="btn primary" id="yesBtn">Тэгье ♡</button>
-          <button class="btn secondary no-btn" id="noBtn">Үгүй</button>
-        </div>
-        <div class="bottom-text">GOOD COFFEE · GOOD TALK · GOOD TIME</div>
-      </div>
-    </section>
+  <section class="screen active" id="s1">
+    <div class="photo photo1"></div><div class="veil"></div>
+    <div class="grain"></div>
+    <div class="floating-hearts"></div>
 
-    <section class="screen" id="screen2">
-      <div class="background coffee-bg"></div><div class="dark-overlay"></div>
-      <div class="content center-content">
-        <div class="script">Nice choice ♡</div>
-        <div class="big-coffee">☕</div>
-        <h2>Тийм бол...<br>явацгаая. ♡</h2>
-        <button class="circle-btn" id="toDay">→</button>
-      </div>
-    </section>
+    <div class="hero">
+      <div class="eyebrow">COFFEE • 01</div>
+      <div class="cup">☕</div>
+      <h1><span>Кофе</span><span>уух уу?<i>♡</i></span></h1>
+      <p>Сайн кофе, сайхан яриа,<br>жаахан тухтай цаг.</p>
 
-    <section class="screen light-screen" id="screen3">
-      <div class="leaf leaf1">❧</div><div class="leaf leaf2">❧</div>
-      <div class="content choice-content">
-        <div class="small-title brown">COFFEE DATE</div>
-        <div class="calendar-icon">♡</div>
-        <h2>Аль өдөр<br>тохиромжтой вэ?</h2>
-        <p class="subtitle">Чамд тохирох өдрөө сонгоорой.</p>
-        <div class="day-grid">
-          <button class="day-card" data-day="Бямба" data-en="Saturday">
-            <div class="card-image saturday"></div>
-            <div class="card-info"><strong>Бямба</strong><span>Saturday</span></div>
-            <div class="check">✓</div>
-          </button>
-          <button class="day-card" data-day="Ням" data-en="Sunday">
-            <div class="card-image sunday"></div>
-            <div class="card-info"><strong>Ням</strong><span>Sunday</span></div>
-            <div class="check">✓</div>
-          </button>
-        </div>
-        <button class="next-btn" id="dayNext" disabled>Дараах →</button>
+      <div class="actions">
+        <button class="yes" id="yes">Тэгье <b>♡</b></button>
+        <button class="no" id="no">Үгүй</button>
       </div>
-    </section>
+    </div>
+    <div class="footer">GOOD COFFEE · GOOD TALK · GOOD TIME</div>
+  </section>
 
-    <section class="screen light-screen" id="screen4">
-      <div class="leaf leaf1">❧</div><div class="leaf leaf2">❧</div>
-      <div class="content choice-content">
-        <div class="small-title brown">COFFEE DATE</div>
-        <div class="clock-icon">◷</div>
-        <h2>Цаг хэд вэ?</h2>
-        <p class="subtitle">Тохиромжтой цагаа сонгоно уу.</p>
-        <div class="time-grid">
-          <button class="time-card" data-time="10:00"><span>☼</span><strong>10:00</strong></button>
-          <button class="time-card" data-time="12:00"><span>☼</span><strong>12:00</strong></button>
-          <button class="time-card" data-time="14:00"><span>☼</span><strong>14:00</strong></button>
-          <button class="time-card" data-time="16:00"><span>☼</span><strong>16:00</strong></button>
-        </div>
-        <button class="next-btn" id="timeNext" disabled>Дараах →</button>
-      </div>
-    </section>
+  <section class="screen" id="s2">
+    <div class="photo photo2"></div><div class="veil dark"></div>
+    <div class="center">
+      <div class="script">Nice choice ♡</div>
+      <div class="giant-cup">☕</div>
+      <h2>Тэгвэл<br>явцгаая.</h2>
+      <button class="round" id="continue">↓</button>
+    </div>
+  </section>
 
-    <section class="screen final-screen" id="screen5">
-      <div class="background final-bg"></div><div class="dark-overlay"></div>
-      <div class="content final-content">
-        <div class="script">Almost there ♡</div>
-        <h2>Тэгвэл<br>уйдахааргүй<br>уулзъя. ♡</h2>
-        <div class="date-summary">
-          <div><span>Өдөр</span><strong id="selectedDay">—</strong></div>
-          <div class="divider"></div>
-          <div><span>Цаг</span><strong id="selectedTime">—</strong></div>
-        </div>
-        <button class="meet-btn" id="meetBtn">Уулзъя ♡</button>
-      </div>
-    </section>
+  <section class="screen light" id="s3">
+    <div class="decor leaf-a">❧</div><div class="decor leaf-b">❧</div>
+    <div class="choice">
+      <div class="eyebrow brown">COFFEE • 02</div>
+      <div class="tiny-icon">✦</div>
+      <h2>Аль өдөр<br>тохиромжтой вэ?</h2>
+      <p>Чамд тохирох өдрөө сонгоорой.</p>
 
-    <section class="screen last-screen" id="screen6">
-      <div class="background final-bg"></div><div class="dark-overlay"></div>
-      <div class="content last-content">
-        <div class="small-title">COFFEE DATE</div>
-        <div class="last-coffee">☕</div>
-        <h2>See you soon</h2>
-        <div class="heart">♡</div>
-        <p>Сайн кофе,<br>сайхан яриа,<br>илүү олон сайхан мөч. ♡</p>
-        <div class="bottom-text">GOOD COFFEE · GOOD TALK · GOOD TIME</div>
+      <div class="days">
+        <button class="day" data-day="Бямба" data-en="Saturday">
+          <div class="day-img sat"></div>
+          <div class="day-text"><strong>Бямба</strong><small>Saturday</small></div>
+          <em>✓</em>
+        </button>
+        <button class="day" data-day="Ням" data-en="Sunday">
+          <div class="day-img sun"></div>
+          <div class="day-text"><strong>Ням</strong><small>Sunday</small></div>
+          <em>✓</em>
+        </button>
       </div>
-    </section>
-  </main>
-  <script src="script.js"></script>
+
+      <button class="next" id="dayNext" disabled>Дараах <span>→</span></button>
+    </div>
+  </section>
+
+  <section class="screen light" id="s4">
+    <div class="decor leaf-a">❧</div><div class="decor leaf-b">❧</div>
+    <div class="choice">
+      <div class="eyebrow brown">COFFEE • 03</div>
+      <div class="tiny-icon">◷</div>
+      <h2>Хэдэн цагт<br>уулзах вэ?</h2>
+      <p>Өөрт тохирох цагаа сонгоорой.</p>
+
+      <div class="times">
+        <button class="time" data-time="10:00"><span>☼</span><b>10:00</b></button>
+        <button class="time" data-time="12:00"><span>☼</span><b>12:00</b></button>
+        <button class="time" data-time="14:00"><span>☼</span><b>14:00</b></button>
+        <button class="time" data-time="16:00"><span>☼</span><b>16:00</b></button>
+      </div>
+      <button class="next" id="timeNext" disabled>Дараах <span>→</span></button>
+    </div>
+  </section>
+
+  <section class="screen" id="s5">
+    <div class="photo photo3"></div><div class="veil"></div>
+    <div class="center final">
+      <div class="script">Almost there ♡</div>
+      <h2>Тэгвэл<br>уйдахааргүй<br>уулзъя.</h2>
+      <div class="summary">
+        <div><small>ӨДӨР</small><b id="pickedDay">—</b></div>
+        <i></i>
+        <div><small>ЦАГ</small><b id="pickedTime">—</b></div>
+      </div>
+      <button class="meet" id="meet">Уулзъя ♡</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s6">
+    <div class="photo photo4"></div><div class="veil"></div>
+    <div class="center last">
+      <div class="eyebrow">COFFEE • 04</div>
+      <div class="last-cup-wrap">
+        <div class="steam"><i></i><i></i><i></i></div>
+        <div class="last-cup">☕</div>
+      </div>
+      <div class="final-orbit"><span>♡</span><span>✦</span><span>♡</span><span>✦</span></div>
+      <h2>See you soon</h2>
+      <div class="big-heart">♡</div>
+      <p>Сайн кофе,<br>сайхан яриа,<br>сайхан мөчүүд.</p>
+    </div>
+  </section>
+
+</div>
+<script src="script.js"></script>
 </body>
 </html>
